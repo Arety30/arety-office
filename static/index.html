@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arety Office</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23e5322d'/><text x='16' y='23' font-size='19' font-family='Arial' font-weight='700' text-anchor='middle' fill='white'>A</text></svg>">
+<link rel="stylesheet" href="/static/vendor/quill.snow.css">
+<link rel="stylesheet" href="/static/vendor/xspreadsheet.css">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header id="tabbar">
+  <div class="tab home active" data-tab="home"><span class="logo">A</span>Arety Office</div>
+  <div id="tabs"></div>
+  <button id="newtab" title="New document">+</button>
+  <div class="spacer"></div>
+  <span class="pill" title="Everything runs on this laptop. No cloud, no account.">● Offline</span>
+</header>
+
+<main id="home" class="view active">
+  <nav id="side">
+    <button class="nav active" data-page="start">🏠 Home</button>
+    <button class="nav" data-page="files">📁 Files</button>
+    <button class="nav" data-page="convert">🔁 Convert</button>
+    <div class="side-foot">Files open locally with pandoc, LibreOffice and openpyxl.</div>
+  </nav>
+
+  <section id="page-start" class="page active">
+    <h1>New</h1>
+    <div class="cards">
+      <button class="card doc" data-new="doc"><span class="badge">W</span><b>Document</b><small>.docx</small></button>
+      <button class="card sheet" data-new="sheet"><span class="badge">S</span><b>Spreadsheet</b><small>.xlsx</small></button>
+      <button class="card slides" data-new="slides"><span class="badge">P</span><b>Presentation</b><small>.pptx</small></button>
+      <button class="card open" id="open-btn"><span class="badge">📂</span><b>Open</b><small>browse the laptop</small></button>
+    </div>
+    <div class="row-head"><h1>Recent</h1><input id="recent-filter" placeholder="Filter recent…"></div>
+    <div id="recent" class="list"></div>
+  </section>
+
+  <section id="page-files" class="page">
+    <div class="files-top">
+      <div id="places"></div>
+      <div class="crumbs"><button id="up" title="Up">↑</button><input id="path" spellcheck="false"><button id="go">Go</button></div>
+      <div class="files-tools">
+        <input id="search" placeholder="Search file names under this folder…">
+        <label><input type="checkbox" id="showall"> all files</label>
+        <button id="mkdir">New folder</button>
+      </div>
+    </div>
+    <div id="filelist" class="list"></div>
+  </section>
+
+  <section id="page-convert" class="page">
+    <h1>Convert files</h1>
+    <p class="muted">Pick a file, choose a format. The result is saved next to the original. Everything runs offline.</p>
+    <div class="convert-box">
+      <div class="convert-file"><input id="conv-path" placeholder="~/Documents/report.docx"><button id="conv-pick">Choose…</button></div>
+      <div id="conv-formats" class="formats"></div>
+      <label><input type="checkbox" id="conv-ocr"> OCR first (scanned PDF / photo)</label>
+      <button id="conv-run" class="primary">Convert</button>
+      <div id="conv-out" class="muted"></div>
+    </div>
+  </section>
+</main>
+
+<div id="docs"></div>
+
+<div id="modal" class="modal hidden"><div class="box">
+  <h2 id="m-title"></h2>
+  <div id="m-body"></div>
+  <div class="m-actions"><button id="m-cancel">Cancel</button><button id="m-ok" class="primary">OK</button></div>
+</div></div>
+<div id="toast"></div>
+
+<script src="/static/vendor/quill.js"></script>
+<script src="/static/vendor/xspreadsheet.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
